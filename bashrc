@@ -44,6 +44,10 @@ alias tgrade='sudo ~/tools/topgrade'
 alias ee='sudo gedit'
 # check NetworkManager status (quickly)
 alias netstatus='sudo systemctl status NetworkManager'
+# opens file explorer to directory
+alias explore='xdg-open'
+# expanding the ll operation
+alias ll='ls -lah'
 
 # macchanger, with disabling and re-enabling of the interface
 # first argument should be interface identifier (ex: wlo1, wlan0)
