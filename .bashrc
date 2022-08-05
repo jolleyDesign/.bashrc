@@ -69,6 +69,15 @@ randmac() {
 # verbose information on IP and Mac before and after changes made
 # first argument should be interface identifier (ex: wlo1, wlan1)
 PRIV() {
+	
+	if [ $1 == "help" ]; then
+		echo "First argument should be interface identifier (ex: wlo1, wlan1, etc). No other arguments should be provided."
+		return 0
+	elif [ -z "$1" ]; then
+		echo "First argument should be interface identifier (ex: wlo1, wlan1, etc). No other arguments should be provided."
+		return 0
+	fi
+
 	echo "Current IP conf: "
 	ifconfig $1 | grep inet
 	piactl connect
