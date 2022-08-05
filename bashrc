@@ -1,11 +1,14 @@
 # .bashrc
 
-# setting custom PS1 / user prompt
+# setting simple custom PS1 user prompt
 PS1="\w > "
 
 # Source global definitions
 
+# adding path to sbin directory
 export PATH="$PATH:/sbin"
+# adding path to android-studio
+export PATH="$PATH:/home/jolley/tools/android-studio/bin/"
 
 if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
@@ -48,6 +51,8 @@ alias netstatus='sudo systemctl status NetworkManager'
 alias explore='xdg-open'
 # expanding the ll operation
 alias ll='ls -lah'
+# alias for opening android studio
+alias studio='studio.sh'
 
 # macchanger, with disabling and re-enabling of the interface
 # first argument should be interface identifier (ex: wlo1, wlan0)
@@ -59,15 +64,17 @@ randmac() {
 
 
 # PRIVatize network information
+# prereqs: Private Internet Access cli (piactl) and macchanger
 # randomizes mac address using my randmac() function, and enables PIA VPN
 # verbose information on IP and Mac before and after changes made
+# first argument should be interface identifier (ex: wlo1, wlan1)
 PRIV() {
 	echo "Current IP conf: "
 	ifconfig $1 | grep inet
 	piactl connect
 	randmac $1
 	echo "Getting new IP information: "
-	sleep 3
+	sleep 4
 	piactl get pubip && piactl get vpnip
 	ifconfig $1 | grep inet
 }
